@@ -153,7 +153,7 @@ int len = length_list(&list);
 float* res = (float*) malloc(len * sizeof(float));
 for (int i = 0; i<len; i++)
 	{
-	res[len-1-i] = list->data;
+	res[i] = list->data;
 	list = list->suiv;
 	}
 return res;
