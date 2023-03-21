@@ -16,6 +16,18 @@ nouveau->suiv = tete;
 return nouveau;
 }
 
+noeud* supprimer_noeud(noeud* tete)
+{
+if(tete != NULL)
+    {
+    noeud* nouveau = tete->suiv;
+    free(tete);
+    return nouveau;
+    }
+printf("Warning : trying to remove an element from a empty list.\n");
+return NULL;
+}
+
 int longueur_liste(noeud* tete)
 {
 int res = 0;
@@ -101,6 +113,8 @@ float* tab4 = changer_taille(tab2, 6, 20);
 noeud* tete = NULL;
 tete = ajouter_noeud(tete,10);
 tete = ajouter_noeud(tete,5);
+tete = ajouter_noeud(tete,10);
+tete = supprimer_noeud(tete);
 printf("longueur : %d \n",longueur_liste(tete));
 
 float* tab = list_to_array(tete);
