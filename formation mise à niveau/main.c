@@ -115,15 +115,17 @@ tete = ajouter_noeud(tete,10);
 tete = ajouter_noeud(tete,5);
 tete = ajouter_noeud(tete,10);
 tete = supprimer_noeud(tete);
-printf("longueur : %d \n",longueur_liste(tete));
+/* printf("longueur : %d \n",longueur_liste(tete)); */
 
 float* tab = list_to_array(tete);
 noeud* final = array_to_list(tab,2);
 
-while(final != NULL)
+/* while(final != NULL)
     {
     printf(" %f ",final->data);
     final = final->suiv;
     }
-printf("\n");
+printf("\n"); */
+
+
 }
