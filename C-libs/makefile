@@ -1,4 +1,4 @@
-test: test.o linked_lists.o adjacency_matrix.o
+test: test.o adjacency_matrix.o
 	gcc test.o adjacency_matrix.o -o test -lm
 
 test.o: test.c
