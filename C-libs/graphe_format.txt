@@ -1,0 +1,5 @@
+nombre_sommets
+sommet sommet
+sommet sommet
+sommet sommet
+...
