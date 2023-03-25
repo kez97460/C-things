@@ -1,8 +1,23 @@
-test: test.o adjacency_matrix.o
-	gcc test.o adjacency_matrix.o -o test -lm
+CC=gcc
+CFLAGS= -I./include
+LDFLAGS=
 
-test.o: test.c
-	gcc -c test.c
+SRCDIR=./src
+SOURCES=$(wildcard $(SRCDIR)/*.c)
+OBJECTS=$(SOURCES:.c=.o)
 
-adjacency_matrix.o: adjacency_matrix.c
-	gcc -c adjacency_matrix.c
+EXECUTABLE=test
+
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS) main.o
+	$(CC) $(LDFLAGS) $(OBJECTS) main.o -o $@ -lm
+
+$(SRCDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@ -lm 
+
+main.o: main.c
+	$(CC) $(CFLAGS) -c $< -o $@ -lm
+
+clean:
+	rm -f $(EXECUTABLE) $(OBJECTS)

@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "adjacency_matrix.h"
+#include "graphs.h"
+
+/********************/
+/* Adjacency matrix */
+/********************/
 
 // reads a graph from a file, and creates an adjacency matrix. The name of the vertices should be ints starting from 0.
 graph_matrix read_adjacency_matrix(char* filename, int is_directed)
@@ -56,4 +60,8 @@ for(int i = 0; i < n; i++)
 for(int i = 0; i < 2*n; i++) printf("-"); // looks good
 printf("\n");
 }
+
+/******************/
+/* Adjacency list */
+/******************/
 
