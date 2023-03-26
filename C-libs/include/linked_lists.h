@@ -14,7 +14,6 @@ node;
 
 typedef node* list;
 
-list empty_list();
 void print_list(list* list_pointer , int n_max);
 void add_node(list* list_pointer , float data);
 void delete_head(list* list_pointer);
@@ -22,6 +21,8 @@ void mirror_list(list* list_pointer);
 void concat_list(list* list_pointer_debut , list* list_pointer_fin);
 void merge_sort_list(list* list_pointer);
 int length_list(list* list_pointer);
+
+#endif
 // copy_list(list* list_pointer_origin, list* list_pointer_copy)
 
 /////////////////////////////////// (fonctions statistiques - flemme de les changer pour prendre list* donc whatever)
@@ -33,5 +34,5 @@ float mean_list(list list);
 float ecart_type_list(list list);
 void print_stats_list(list list);
 
-#endif
+
 

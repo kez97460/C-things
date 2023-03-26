@@ -10,7 +10,7 @@
 
 int main() 
 {
-char filename[] = "graphe_pondere_exemple.txt";
+char filename[] = "graphe_pondere_ei17.txt";
 weighted_graph_matrix graph = read_adjacency_matrix_weighted(filename,0);
 print_matrix_weighted(graph.matrix,graph.nb_vertices);
 }

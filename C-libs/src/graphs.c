@@ -65,3 +65,54 @@ printf("\n");
 /* Adjacency list */
 /******************/
 
+// add an element to a list of neighbors
+void add_neighbor(vertex_list* list_pointer , int vertex) 
+{
+vertex_list nouveau = (vertex_list) malloc(sizeof(struct _vertex_node));
+nouveau->data = vertex;
+nouveau->suiv = *list_pointer;
+*list_pointer = nouveau;
+}
+
+// delete head from list of neighbors
+void delete_head_neighbor(vertex_list* list_pointer) 
+{
+*list_pointer = (*list_pointer)->suiv;
+}
+
+// reads a graph from a file, and creates an adjacency list array. The name of the vertices should be ints starting from 0.
+graph_adjacency_lists read_adjacency_lists(char* filename, int is_directed)
+{
+FILE* file = fopen(filename,"r");
+if(file == NULL)
+    {
+    printf("Error : could not read from file %s \n",filename);
+    graph_adjacency_lists graph;
+    graph.nb_vertices = 0;
+    graph.vertex_array = NULL;
+    return graph; // this is just an empty graph;
+    }
+// read the number of vertices from file
+int nb_vertices;
+fscanf(file,"%d",&nb_vertices); 
+// allocating memory for the adjacency lists
+graph_adjacency_lists graph;
+graph.nb_vertices = nb_vertices;
+graph.vertex_array = (vertex_list*) malloc(nb_vertices * sizeof(vertex_list));
+for(int i = 0; i < nb_vertices; i++)
+    {
+    graph.vertex_array[i] = NULL; // make empty lists of neighbors 
+    }
+// fill the adjacency lists
+int i,j; 
+while(fscanf(file,"%d %d",&i,&j) > 0)
+    {
+    add_neighbor(&graph.vertex_array[i],j); // add j to i's neighbors
+    if(!is_directed) // if the graph is undirected
+        {
+        add_neighbor(&graph.vertex_array[j],i); // add i to j's neighbors
+        }
+    }
+fclose(file);
+return graph;
+}

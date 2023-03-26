@@ -10,9 +10,6 @@ if(file == NULL)
     {
     printf("Error : could not read from file %s \n",filename);
     weighted_graph_matrix graph;
-    graph.nb_vertices = 0;
-    graph.matrix = (float**) malloc(sizeof(float*)); 
-    graph.matrix[0] = (float*) malloc(sizeof(float));
     return graph; // this is just an empty graph;
     }
 // read the number of vertices from file
@@ -27,6 +24,13 @@ for(int i = 0; i < nb_vertices; i++)
     graph.matrix[i] = (float*) malloc(nb_vertices * sizeof(float));
     }
 // fill the matrix
+for(int i = 0; i < nb_vertices; i++)
+    {
+    for(int j = 0; j < nb_vertices; j++)
+        {
+        graph.matrix[i][j] = -1; // initialize weights to -1 (impossible)
+        }
+    }
 int i,j; 
 float weight;
 while(fscanf(file,"%d %d %f",&i,&j,&weight) > 0)
@@ -50,11 +54,10 @@ for(int i = 0; i < n; i++)
     {
     for(int j = 0; j < n; j++)
         {
-        printf("%.2f ",matrix[i][j]);
+        printf("%.1f ",matrix[i][j]);
         }
     printf("\n");
     }
 for(int i = 0; i < 2*n; i++) printf("-"); // looks good
 printf("\n");
 }
-

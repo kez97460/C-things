@@ -9,20 +9,20 @@ int nb_vertices;
 } graph_matrix;
 
 // linked lists
-struct _node
+struct _vertex_node
 {
 int data;
-struct _node* suiv;
+struct _vertex_node* suiv;
 };
 
-typedef struct _node* vertex_list; 
+typedef struct _vertex_node* vertex_list; 
 
 // used to store graphs as adjacency lists
-typedef struct _graph_adjacency_list
+typedef struct _graph_adjacency_lists
 {
 vertex_list* vertex_array; // array of lists of neighbors
 int nb_vertices;
-} graph_adjacency_list;
+} graph_adjacency_lists;
 
 
 /*--- Functions ---*/
