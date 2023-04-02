@@ -32,6 +32,7 @@ graph_matrix read_adjacency_matrix(char* filename, int is_directed);
 void print_matrix(int** matrix, int n);
 
 /* Adjacency list */
-
+graph_adjacency_lists read_adjacency_lists(char* filename, int is_directed);
+void print_adjacency_lists(graph_adjacency_lists graph);
 
 #endif
