@@ -116,3 +116,21 @@ while(fscanf(file,"%d %d",&i,&j) > 0)
 fclose(file);
 return graph;
 }
+
+void print_adjacency_lists(graph_adjacency_lists graph)
+{
+int length = graph.nb_vertices;
+printf("----------\n"); // looks good
+for(int i = 0; i < length; i++)
+{
+    printf("%d - (",i);
+    vertex_list tete = (graph.vertex_array[i]);
+    while(tete != NULL)
+    {
+        printf(" %d ",tete->data);
+        delete_head_neighbor(&tete);
+    }
+    printf(")\n");
+}
+printf("----------\n"); // looks good
+}
