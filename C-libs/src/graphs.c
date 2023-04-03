@@ -44,6 +44,31 @@ fclose(file);
 return graph;
 }
 
+// Writes a graph to a file using an adjacency matrix
+void write_adjacency_matrix(char* filename, graph_matrix graph, int is_directed)
+{
+FILE* file = fopen(filename,"w");
+if(file == NULL)
+    {
+    printf("Error : could not open file %s \n",filename);
+    return;
+    }
+// write the number of vertices to file
+fprintf(file,"%d\n",graph.nb_vertices); 
+// Go through the matrix and write vertices to file
+for(int i = 0; i < graph.nb_vertices; i++)
+{
+    for (int j = 0; j < graph.nb_vertices; j++)
+    {
+        if (i < j || is_directed)
+        {
+            fprintf(file, "%d %d\n", i, j);
+        }   
+    }
+}
+fclose(file);
+}
+
 // prints a square matrix (2 dimensional array with nb_lines == nb_columns)
 void print_matrix(int** matrix, int n)
 {
@@ -64,6 +89,7 @@ printf("\n");
 /******************/
 /* Adjacency list */
 /******************/
+// Unfinished as it is annoying
 
 // add an element to a list of neighbors
 void add_neighbor(vertex_list* list_pointer , int vertex) 
@@ -115,6 +141,33 @@ while(fscanf(file,"%d %d",&i,&j) > 0)
     }
 fclose(file);
 return graph;
+}
+
+// UNFINISHED
+void write_adjacency_lists(char* filename, graph_adjacency_lists graph,int is_directed)
+{
+FILE* file = fopen(filename,"w");
+if(file == NULL)
+    {
+    printf("Error : could not open file %s \n",filename);
+    return; 
+    }
+// write the number of vertices to file
+fprintf(file,"%d\n",graph.nb_vertices); 
+// fill the file
+int i,j; 
+for (int i = 0; i < graph.nb_vertices; i++)
+{
+    vertex_list tete = graph.vertex_array[i];
+    while(tete != NULL)
+        {
+        if(!is_directed) // if the graph is undirected
+            {
+            
+            }
+        }
+    }
+fclose(file);
 }
 
 void print_adjacency_lists(graph_adjacency_lists graph)

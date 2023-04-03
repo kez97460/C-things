@@ -1,31 +1,31 @@
-#ifndef PILES_FILES_H
-#define PILES_FILES_H
+#ifndef STACKS_QUEUES_H
+#define STACKS_QUEUES_H
 
-typedef struct node 
+typedef struct _node 
 {
     int data;
     struct node* next;
 } Node;
 
-typedef Node* Pile;
+typedef Node* Stack;
 
-typedef struct file 
+typedef struct _queue
 {
-    Pile* entree;
-    Pile* sortie;
-} File;
+    Stack* in;
+    Stack* out;
+} Queue;
 
 // Stack functions
-Pile* pile_vide();
-int pile_est_vide(Pile* pile);
-void empiler(Pile* pile, int data);
-int depiler(Pile* pile);
-void print_pile(Pile* pile);
+Stack* empty_stack();
+int is_stack_empty(Stack* pile);
+void push(Stack* pile, int data);
+int pop(Stack* pile);
+void print_stack(Stack* pile);
 
 // Queue functions
-File* file_vide();
-int file_est_vide(File* file);
-void enfiler(File* file, int data);
-int defiler(File* file);
+Queue* empty_queue();
+int is_queue_empty(Queue* file);
+void enqueue(Queue* file, int data);
+int dequeue(Queue* file);
 
 #endif

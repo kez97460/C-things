@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "piles_files.h"
+#include "stacks_queues.h"
 
 int main()
 {
-File* f = file_vide();
-enfiler(f,2);
-enfiler(f,5);
-enfiler(f,10);
+Queue* f = empty_queue();
+enqueue(f,2);
+enqueue(f,5);
+enqueue(f,10);
 }

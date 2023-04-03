@@ -1,87 +1,90 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "piles_files.h"
+#include "stacks_queues.h"
 
-Pile* pile_vide() 
+Stack *empty_stack()
 {
-    Pile* pile = (Pile*)malloc(sizeof(Pile));
-    *pile = NULL;
-    return pile;
+    Stack *stack = (Stack *)malloc(sizeof(Stack));
+    *stack = NULL;
+    return stack;
 }
 
-int pile_est_vide(Pile* pile) 
+int is_stack_empty(Stack *stack)
 {
-    return (*pile == NULL);
+    return (*stack == NULL);
 }
 
-void empiler(Pile* pile, int data) 
+void push(Stack *stack, int data)
 {
-    Node* nouveau = (Node*)malloc(sizeof(Node));
+    Node *nouveau = (Node *)malloc(sizeof(Node));
     nouveau->data = data;
-    nouveau->next = *pile;
-    *pile = nouveau;
+    nouveau->next = *stack;
+    *stack = nouveau;
 }
 
-int depiler(Pile* pile) 
+int pop(Stack *stack)
 {
-    if (pile_est_vide(pile)) 
-	{
+    if (is_stack_empty(stack))
+    {
         printf("Stack Underflow\n");
         return -1;
     }
-    Node* temp = *pile;
+    Node *temp = *stack;
     int data = temp->data;
-    *pile = temp->next;
+    *stack = temp->next;
     free(temp);
     return data;
 }
 
-void print_pile(Pile* pile) 
+void print_stack(Stack *stack)
 {
-    if (pile_est_vide(pile)) 
-	{
+    if (is_stack_empty(stack))
+    {
         printf("Stack is empty\n");
         return;
     }
     printf("Stack elements are:\n");
-    Node* temp = *pile;
-    while (temp != NULL) {
-        printf("%d\n", temp->data);
+    Node *temp = *stack;
+    while (temp != NULL)
+    {
+        printf(" %d ", temp->data);
         temp = temp->next;
     }
+    printf("\n");
 }
 
-File* file_vide() 
+Queue *empty_queue()
 {
-    File* file = (File*)malloc(sizeof(File));
-    file->entree = pile_vide();
-    file->sortie = pile_vide();
-    return file;
+    Queue *queue = (Queue *)malloc(sizeof(Queue));
+    queue->in = empty_stack();
+    queue->out = empty_stack();
+    return queue;
 }
 
-int file_est_vide(File* file) 
+int is_queue_empty(Queue *queue)
 {
-    return (pile_est_vide(file->entree) && pile_est_vide(file->sortie));
+    return (is_stack_empty(queue->in) && is_stack_empty(queue->out));
 }
 
-void enfiler(File* file, int data) 
+void enqueue(Queue *queue, int data)
 {
-    empiler(file->entree, data);
+    push(queue->in, data);
 }
 
-int defiler(File* file) 
+int dequeue(Queue *queue)
 {
-    if (file_est_vide(file)) {
+    if (is_queue_empty(queue))
+    {
         printf("Queue is already empty\n");
         return -1;
     }
-    if (pile_est_vide(file->sortie)) 
-	{
-        while (!pile_est_vide(file->entree)) 
-		{
-            int data = depiler(file->entree);
-            empiler(file->sortie, data);
+    if (is_stack_empty(queue->out))
+    {
+        while (!is_stack_empty(queue->in))
+        {
+            int data = pop(queue->in);
+            push(queue->out, data);
         }
     }
-    return depiler(file->sortie);
+    return pop(queue->out);
 }
